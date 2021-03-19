@@ -80,7 +80,7 @@ resource "aws_elasticache_replication_group" "cluster" {
   snapshot_window               = var.snapshot_window
   snapshot_retention_limit      = var.snapshot_retention_limit
   apply_immediately             = var.apply_immediately
-  availability_zones            = slice(var.availability_zones, 0, var.num_node_groups)
+  availability_zones            = var.num_node_groups == 1 ? slice(var.availability_zones, 0, var.num_node_groups) : null
   auto_minor_version_upgrade    = var.auto_minor_version_upgrade
   maintenance_window            = var.maintenance_window
   at_rest_encryption_enabled    = var.at_rest_encryption_enabled
